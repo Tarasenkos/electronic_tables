@@ -1,9 +1,19 @@
 import('./scss/index.scss');
+import {Excel} from './components/excel/Excel';
+import {Header} from './components/header/header';
+import {Toolbar} from './components/toolbar/toolbar';
+import {Formula} from './components/formula/formula';
+import {Table} from './components/table/table';
 
-console.log('Start');
+
+const excel = new Excel('#app', {
+  components: [Header, Toolbar, Formula, Table],
+})
+
+excel.render();
+
+// setTimeout(function() {
+//   excel.removeListeners()
+// }, 5000)
 
 
-async function start() {
-  return await Promise.resolve('async is working');
-}
-start().then(console.log);
