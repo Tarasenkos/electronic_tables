@@ -1,8 +1,8 @@
 class Dom {
   constructor(selector) {
-    this.$el = typeof selector === 'string'
-      ? document.querySelector(selector)
-      : selector;
+    this.$el = typeof selector === 'string' // Значит элемент уже отрисован
+      ? document.querySelector(selector) // Выбираем его по селектору в id
+      : selector; // Присваиваем данные из метода create
 
     // console.log('Дом элемент', this.$el)
   }
@@ -46,7 +46,7 @@ $.create = (tagName, classes = '') => {
   const element = document.createElement(tagName)
 
   if (classes) {
-    classes.split(' ').map( (className) => element.classList.add(className))
+    classes.split(' ').map((className) => element.classList.add(className))
   }
   return $(element)
 }

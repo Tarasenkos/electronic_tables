@@ -10,7 +10,10 @@ function toChar(_, index) {
 
 function createCol(_, index) {
   return `
-  <div class="column">${toChar(_, index)}</div>
+  <div class="column">
+  ${toChar(_, index)}
+  <div class="col-resize"></div>
+  </div>
   `
 }
 
@@ -24,7 +27,10 @@ function toCell() {
 function createRow(index = '', content='') {
   return `
   <div class="row">
-    <div class="row-info">${index}</div>
+    <div class="row-info">
+    ${index}
+    ${index ? '<div class="row-resize"></div>' : ''}
+    </div>
     <div class="row-data">${content}</div>
   </div>
   `
