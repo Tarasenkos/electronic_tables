@@ -16,11 +16,11 @@
     flex-direction: row;
     min-height: 20px;
     height: $row-height;
-
   }
 
   .row-info{
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     min-width: $info-cell-width;
@@ -32,13 +32,11 @@
   }
 
   .row-data{
-
     display: flex;
-
-
   }
 
   .column{
+    position: relative;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -51,6 +49,7 @@
 
   }
 
+
   .cell{
     height: 100%;
     min-width: 40px;
@@ -61,16 +60,66 @@
     border-bottom: 1px solid #e2e3e3;
     white-space: nowrap;
     outline: none;
-    
-
-
     &.selected{
       border: none;
       outline: 2px solid #1a73e8;
       z-index: 2;
+    }
+  }
+
+  .col-resize, .row-resize {
+    z-index: 2;
+    position: absolute;
+    background-color: $border-resize;
+    opacity: 0;
+    &:hover {
+      opacity: 1;
 
     }
+    &:active {
+      opacity: 1;
+    }
 
+  }
+  .col-resize {
+    top:0;
+    bottom:0;
+    right: -2px;
+    width: 3px;
+    &:hover {
+      cursor: col-resize;
+    }
+    &:active {
+      opacity: 1;
+    }
+    
+  }
+
+  .col-resize-line {
+    border-right-color: $border-resize;
+    
+  }
+
+  .row-resize {
+    left: 0;
+    right:0;
+    bottom:-2px;
+    height: 3px;
+    &:hover {
+      cursor: row-resize;
+    }
+    &:active:after {
+      position: absolute;
+      display:block;
+      content:'';
+      bottom: 1px;
+      left:2px;
+      right: -1300px;
+      background-color: $border-resize;
+      height: 1px;
+      opacity:1;
+      
+    }
   }
 
 }

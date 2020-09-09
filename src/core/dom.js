@@ -1,8 +1,8 @@
 class Dom {
   constructor(selector) {
-    this.$el = typeof selector === 'string'
-      ? document.querySelector(selector)
-      : selector;
+    this.$el = typeof selector === 'string' // Значит элемент уже отрисован
+      ? document.querySelector(selector) // Выбираем его по селектору в id
+      : selector; // Присваиваем данные из метода create
 
     // console.log('Дом элемент', this.$el)
   }
@@ -39,6 +39,28 @@ class Dom {
   off(eventName, callBack) {
     this.$el.removeEventListener(eventName, callBack)
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  get data() {
+    return this.$el.dataset
+  }
+
+  selectAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((key)=>{
+      this.$el.style[key] = styles[key]
+    })
+  }
 }
 
 
@@ -46,7 +68,7 @@ $.create = (tagName, classes = '') => {
   const element = document.createElement(tagName)
 
   if (classes) {
-    classes.split(' ').map( (className) => element.classList.add(className))
+    classes.split(' ').map((className) => element.classList.add(className))
   }
   return $(element)
 }

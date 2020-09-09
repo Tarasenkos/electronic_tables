@@ -13,7 +13,7 @@ export class DomListener {
   initDOMListeners() {
     this.listeners.forEach((listener) => {
       const method = getMethodName(listener)
-      console.log('This is this: ', this)
+      // console.log('This is this: ', this)
       if (!this[method]) {
         throw new Error(`Method ${method} is not defined
         for ${this.name || ''} component`)
