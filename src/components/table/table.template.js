@@ -10,26 +10,27 @@ function toChar(_, index) {
 
 function createCol(_, index) {
   return `
-  <div class="column">
+  <div class="column" data-type="resizable" data-index=${toChar(_, index)}>
   ${toChar(_, index)}
-  <div class="col-resize"></div>
+  <div class="col-resize" data-resize="col"></div>
   </div>
   `
 }
 
-function toCell() {
+function toCell(_, index) {
   return `
-  <div class="cell" contenteditable></div>
+  <div class="cell" 
+    contenteditable data-index=${toChar(_, index)}></div>
   `
 }
 
 
 function createRow(index = '', content='') {
   return `
-  <div class="row">
+  <div class="row" data-type="resizable">
     <div class="row-info">
     ${index}
-    ${index ? '<div class="row-resize"></div>' : ''}
+    ${index ? '<div class="row-resize" data-resize="row"></div>' : ''}
     </div>
     <div class="row-data">${content}</div>
   </div>

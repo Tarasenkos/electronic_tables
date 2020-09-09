@@ -1,5 +1,7 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from './table.template'
+import {tableResize} from './table.resize';
+import {shouldResize} from './table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -7,15 +9,17 @@ export class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['click'],
+      listeners: ['mousedown'],
     })
   }
 
   toHTML() {
-    return createTable(15)
+    return createTable(150)
   }
 
-  onClick(event) {
-    console.log(event)
+  onMousedown(event) {
+    if (shouldResize(event)) {
+      tableResize(event, this.$root)
+    }
   }
 }
