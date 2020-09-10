@@ -1,6 +1,6 @@
 import {$} from '@/core/dom'
 
-export function tableResize(event, $root) {
+export function tableResize($root) {
   const resizable = event.target.dataset.resize
 
   const $resizer = $(event.target)
