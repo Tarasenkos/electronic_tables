@@ -2,11 +2,13 @@
 @import "mixins";
 
 .excel__formula{
-    position:absolute;
+    position:fixed;
     left:0;
     right:0;
     top: $header-height+$toolbar-height;
     height: $formula-height;
+    background-color: #fff;
+    z-index: 3;
     display:flex;
     align-items: center;
     border-bottom: 1px solid $border-color;

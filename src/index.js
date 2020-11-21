@@ -12,8 +12,3 @@ const excel = new Excel('#app', {
 
 excel.render();
 
-// setTimeout(function() {
-//   excel.removeListeners()
-// }, 5000)
-
-

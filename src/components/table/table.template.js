@@ -8,6 +8,7 @@ function toChar(_, index) {
   return String.fromCharCode(Code.A+index)
 }
 
+
 function createCol(_, index) {
   return `
   <div class="column" data-type="resizable" data-index=${toChar(_, index)}>
@@ -17,11 +18,16 @@ function createCol(_, index) {
   `
 }
 
-function toCell(_, index) {
-  return `
-  <div class="cell" 
-    contenteditable data-index=${toChar(_, index)}></div>
-  `
+function toCell(row) {
+  return function(_, index) {
+    return `
+      <div class="cell" 
+      contenteditable data-index=${toChar(_, index)} 
+      data-type="cell"
+      data-id=${index+1}:${row}
+      data-address=${toChar(_, index)}:${row}></div>
+      `
+  }
 }
 
 
@@ -47,13 +53,13 @@ export function createTable(rowsCount = 10) {
 
   rows.push(createRow('', tableHead))
 
-  for (let i=1; i<=rowsCount; i++) {
+  for (let row=1; row<=rowsCount; row++) {
     const cells = new Array(columns)
         .fill()
-        .map(toCell)
+        .map(toCell(row))
         .join('')
 
-    rows.push(createRow(i, cells))
+    rows.push(createRow(row, cells))
   }
 
   return rows.join('')

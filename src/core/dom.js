@@ -1,10 +1,8 @@
 class Dom {
   constructor(selector) {
-    this.$el = typeof selector === 'string' // Значит элемент уже отрисован
-      ? document.querySelector(selector) // Выбираем его по селектору в id
-      : selector; // Присваиваем данные из метода create
-
-    // console.log('Дом элемент', this.$el)
+    this.$el = typeof selector === 'string' // Значит это id dom элемента
+      ? document.querySelector(selector) // Выбираем элемент по селектору в id
+      : selector;
   }
 
   html(text) {
@@ -13,6 +11,14 @@ class Dom {
       return this
     }
     return this.$el.outerHTML.trim()
+  }
+
+  text(text) {
+    this.$el.textContent = text
+  }
+
+  get tex() {
+    return this.$el.textContent
   }
 
   clear() {
@@ -54,6 +60,33 @@ class Dom {
 
   selectAll(selector) {
     return this.$el.querySelectorAll(selector)
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
+  focus() {
+    return $(this.$el.focus())
+  }
+
+  addClass(className) {
+    return this.$el.classList.add(className)
+  }
+
+  removeClass(className) {
+    return this.$el.classList.remove(className)
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        col: +parsed[0],
+        row: +parsed[1],
+      }
+    }
+    return this.data.id
   }
 
   css(styles = {}) {
