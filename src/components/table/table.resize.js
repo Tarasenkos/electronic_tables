@@ -1,29 +1,30 @@
 import {$} from '@/core/dom'
 
-export function tableResize(event, $root) {
+export function tableResize($root) {
   const resizable = event.target.dataset.resize
 
   const $resizer = $(event.target)
   const $parent = $resizer.closest('[data-type="resizable"]')
   const colIndex = $parent.data.index
   const coords = $parent.getCoords()
-  console.log($resizer.$el)
+  // console.log($resizer.$el)
 
   if (resizable === 'col') {
     const cells = $root.selectAll(`[data-index=${colIndex}]`);
     cells.forEach((el)=>el.classList.add('col-resize-line'))
     let delta;
     let value;
+    let deltaX;
+
     document.onmousemove = (e) => {
-      let deltaX;
-      delta = coords.right - e.pageX
-      value = coords.width - delta
-      if (value >40) {
+      delta = e.pageX - coords.right
+      value = coords.width + delta
+      if (value > 20) {
         deltaX = delta
       } else {
-        value = 40
+        value = 20
       }
-      $resizer.$el.style.right = deltaX + 'px';
+      $parent.$el.style.width = coords.width + deltaX + 'px';
     }
 
     document.onmouseup = () => {

@@ -7,10 +7,10 @@ export class DomListener {
     }
     this.$root = $root;
     this.listeners = listeners;
-    console.log('DomListener root element', this.$root)
   }
 
   initDOMListeners() {
+    console.log('This: ', this)
     this.listeners.forEach((listener) => {
       const method = getMethodName(listener)
       // console.log('This is this: ', this)
